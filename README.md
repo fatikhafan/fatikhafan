@@ -1,14 +1,12 @@
 <div align="center">
 
-# 💻 Full-Stack, Java & Creative Developer
-
-<img src="https://komora-profile-readme-stats.vercel.app/api?username=fatikhafan&show_icons=true&theme=tokyonight&hide_border=true&bg_color=1a1b26" width="100%" />
+Web Developer | Data & Backend Enthusiast
 
 </div>
 
 ---
 
-### ☕ Tentang Saya
+☕ Tentang Saya
 
 Lulusan **S1 Teknik Informatika Universitas Islam Lamongan (UNISLA)** yang sedang merintis jalan di dunia teknologi. Perjalanan yang dilalui tidak selalu mulus dan serba ada—terbiasa belajar secara mandiri, memanfaatkan teknologi dan bantuan AI seadanya untuk memecahkan masalah koding, serta bekerja keras dari bawah mulai dari teknisi komputer, staf tata usaha, hingga terjun langsung bekerja fisik di lapangan. 
 
