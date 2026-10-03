@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dev Mini Game - Fatikh Afan</title>
+    <title>Retro Snake Game - Fatikh Afan</title>
     <style>
         body {
             background-color: #0d1117;
@@ -13,37 +13,28 @@
             margin: 0;
             padding: 20px;
         }
-        h2 { color: #58a6ff; }
+        h2 { color: #58a6ff; margin-bottom: 5px; }
         .game-container {
             background: #161b22;
             padding: 20px;
             border-radius: 12px;
             display: inline-block;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.6);
             border: 1px solid #30363d;
         }
-        .board {
-            display: grid;
-            grid-template-columns: repeat(3, 80px);
-            grid-gap: 8px;
+        canvas {
+            background: #010409;
+            border: 2px solid #30363d;
+            border-radius: 8px;
+            display: block;
             margin: 15px auto;
         }
-        .cell {
-            width: 80px;
-            height: 80px;
-            background: #21262d;
-            border: 2px solid #30363d;
-            font-size: 32px;
+        .score-board {
+            font-size: 18px;
             font-weight: bold;
             color: #58a6ff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            border-radius: 8px;
-            transition: 0.2s;
+            margin-bottom: 10px;
         }
-        .cell:hover { background: #30363d; }
         button {
             background: #238636;
             color: white;
@@ -53,91 +44,126 @@
             font-weight: bold;
             border-radius: 6px;
             cursor: pointer;
-            margin-top: 10px;
+            transition: 0.2s;
         }
         button:hover { background: #2ea043; }
-        #status { margin: 10px 0; font-size: 16px; font-weight: bold; }
+        .instructions {
+            font-size: 13px;
+            color: #8b949e;
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
 
     <div class="game-container">
-        <h2>🎮 Quick Dev Tic-Tac-Toe</h2>
-        <div id="status">Giliran Pemain: X</div>
-        <div class="board" id="board"></div>
-        <button onclick="resetGame()">Main Lagi</button>
+        <h2>🐍 Classic Arcade Snake</h2>
+        <div class="score-board">Skor: <span id="score">0</span></div>
+        <canvas id="snakeGame" width="300" height="300"></canvas>
+        <button onclick="resetGame()">Mulai / Main Lagi</button>
+        <div class="instructions">Gunakan tombol Panah (Arrow Keys) di keyboard untuk mengarahkan ular.</div>
     </div>
 
     <script>
-        const boardElement = document.getElementById('board');
-        const statusElement = document.getElementById('status');
-        let board = ['', '', '', '', '', '', '', '', ''];
-        let currentPlayer = 'X';
-        let isGameActive = true;
+        const canvas = document.getElementById("snakeGame");
+        const ctx = canvas.getContext("2d");
+        const scoreElement = document.getElementById("score");
 
-        function createBoard() {
-            boardElement.innerHTML = '';
-            board.forEach((cell, index) => {
-                const cellElement = document.createElement('div');
-                cellElement.classList.add('cell');
-                cellElement.dataset.index = index;
-                cellElement.textContent = cell;
-                cellElement.addEventListener('click', handleCellClick);
-                boardElement.appendChild(cellElement);
-            });
+        const box = 20;
+        let snake = [];
+        snake[0] = { x: 9 * box, y: 10 * box };
+
+        let food = {
+            x: Math.floor(Math.random() * 15) * box,
+            y: Math.floor(Math.random() * 15) * box
+        };
+
+        let score = 0;
+        let d;
+        let game;
+
+        document.addEventListener("keydown", direction);
+
+        function direction(event) {
+            let key = event.keyCode;
+            if (key == 37 && d != "RIGHT") {
+                d = "LEFT";
+            } else if (key == 38 && d != "DOWN") {
+                d = "UP";
+            } else if (key == 39 && d != "LEFT") {
+                d = "RIGHT";
+            } else if (key == 40 && d != "UP") {
+                d = "DOWN";
+            }
         }
 
-        function handleCellClick(e) {
-            const index = e.target.dataset.index;
-            if (board[index] !== '' || !isGameActive) return;
-
-            board[index] = currentPlayer;
-            e.target.textContent = currentPlayer;
-            
-            checkWinner();
-        }
-
-        function checkWinner() {
-            const winConditions = [
-                [0,1,2], [3,4,5], [6,7,8],
-                [0,3,6], [1,4,7], [2,5,8],
-                [0,4,8], [2,4,6]
-            ];
-
-            let roundWon = false;
-            for (let condition of winConditions) {
-                let [a, b, c] = condition;
-                if (board[a] && board[a] === board[b] && board[a] === board[c]) {
-                    roundWon = true;
-                    break;
+        function collision(head, array) {
+            for (let i = 0; i < array.length; i++) {
+                if (head.x == array[i].x && head.y == array[i].y) {
+                    return true;
                 }
             }
+            return false;
+        }
 
-            if (roundWon) {
-                statusElement.textContent = `🎉 Pemenang: ${currentPlayer}!`;
-                isGameActive = false;
-                return;
+        function draw() {
+            ctx.fillStyle = "#010409";
+            ctx.fillRect(0, 0, 300, 300);
+
+            for (let i = 0; i < snake.length; i++) {
+                ctx.fillStyle = (i == 0) ? "#238636" : "#2ea043";
+                ctx.fillRect(snake[i].x, snake[i].y, box, box);
+                ctx.strokeStyle = "#161b22";
+                ctx.strokeRect(snake[i].x, snake[i].y, box, box);
             }
 
-            if (!board.includes('')) {
-                statusElement.textContent = `🤝 Seri!`;
-                isGameActive = false;
-                return;
+            ctx.fillStyle = "#f85149";
+            ctx.fillRect(food.x, food.y, box, box);
+
+            let snakeX = snake[0].x;
+            let snakeY = snake[0].y;
+
+            if (d == "LEFT") snakeX -= box;
+            if (d == "UP") snakeY -= box;
+            if (d == "RIGHT") snakeX += box;
+            if (d == "DOWN") snakeY += box;
+
+            if (snakeX == food.x && snakeY == food.y) {
+                score++;
+                scoreElement.innerHTML = score;
+                food = {
+                    x: Math.floor(Math.random() * 15) * box,
+                    y: Math.floor(Math.random() * 15) * box
+                };
+            } else {
+                snake.pop();
             }
 
-            currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
-            statusElement.textContent = `Giliran Pemain: ${currentPlayer}`;
+            let newHead = { x: snakeX, y: snakeY };
+
+            if (snakeX < 0 || snakeX >= 300 || snakeY < 0 || snakeY >= 300 || collision(newHead, snake)) {
+                clearInterval(game);
+                alert("Game Over! Skor kamu: " + score);
+            }
+
+            snake.unshift(newHead);
         }
 
         function resetGame() {
-            board = ['', '', '', '', '', '', '', '', ''];
-            currentPlayer = 'X';
-            isGameActive = true;
-            statusElement.textContent = `Giliran Pemain: ${currentPlayer}`;
-            createBoard();
+            clearInterval(game);
+            snake = [];
+            snake[0] = { x: 9 * box, y: 10 * box };
+            score = 0;
+            scoreElement.innerHTML = score;
+            d = undefined;
+            food = {
+                x: Math.floor(Math.random() * 15) * box,
+                y: Math.floor(Math.random() * 15) * box
+            };
+            game = setInterval(draw, 120);
         }
 
-        createBoard();
+        resetGame();
     </script>
 </body>
 </html>
