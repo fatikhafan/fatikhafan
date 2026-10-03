@@ -45,5 +45,5 @@ Fokus utama diarahkan pada pengembangan web, pengelolaan database/SQL, pemrogram
 ---
 
 <div align="center">
-  <i>"GO BIG OR GO HOME."</i>
+  <code>⚡ <b>GO BIG OR GO HOME</b> — Berani melangkah atau tidak sama sekali. ⚡</code>
 </div>
