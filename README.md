@@ -6,7 +6,6 @@
 
 </div>
 
----
 
 ☕ Tentang Saya
 
@@ -14,7 +13,6 @@ Lulusan **S1 Teknik Informatika Universitas Islam Lamongan (UNISLA)** yang sedan
 
 Fokus utama diarahkan pada pengembangan web, pengelolaan database/SQL, pemrograman Java, hingga eksplorasi di bidang desain grafis dan video editing.
 
----
 
 ### 🛠️ Keahlian & Tech Stack
 
@@ -47,5 +45,5 @@ Fokus utama diarahkan pada pengembangan web, pengelolaan database/SQL, pemrogram
 ---
 
 <div align="center">
-  <i>"Konsisten belajar, merangkai kode, dan berkarya setiap hari."</i>
+  <i>"GO BIG OR GO HOME."</i>
 </div>
