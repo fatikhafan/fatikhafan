@@ -53,3 +53,13 @@ Fokus utama diarahkan pada pengembangan web, pengelolaan database/SQL, pemrogram
 </div>
 
 
+<div align="center">
+
+### 🕹️ Sela Waktu: Tantang Skill & Mainkan Mini Game
+  <a href="https://fatikhafan.github.io/fatikhafan/game.html" target="_blank">
+    <img src="https://img.shields.io/badge/🎮_Play_Tic_Tac_Toe-Mainkan_Game_Arena-238636?style=for-the-badge&logo=gamepad&logoColor=white" alt="Play Game" />
+  </a>
+  <br>
+  <i>Klik tombol di atas untuk mencoba mini game interaktif buatan saya!</i>
+
+</div>
