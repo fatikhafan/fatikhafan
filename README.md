@@ -50,5 +50,7 @@ Fokus utama diarahkan pada pengembangan web, pengelolaan database/SQL, pemrogram
 
 
 <div align="center">
-  <img src="https://github.com/fatikhafan/fatikhafan/blob/output/github-snake-dark.svg" alt="Snake Animation" />
+
+<img src="https://github-readme-streak-stats.herokuapp.com/?user=fatikhafan&theme=tokyonight&hide_border=true&background=0d1117" alt="GitHub Streak" />
+
 </div>
