@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dev Mini Game - Fatikh Afan</title>
+    <style>
+        body {
+            background-color: #0d1117;
+            color: #c9d1d9;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+        }
+        h2 { color: #58a6ff; }
+        .game-container {
+            background: #161b22;
+            padding: 20px;
+            border-radius: 12px;
+            display: inline-block;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            border: 1px solid #30363d;
+        }
+        .board {
+            display: grid;
+            grid-template-columns: repeat(3, 80px);
+            grid-gap: 8px;
+            margin: 15px auto;
+        }
+        .cell {
+            width: 80px;
+            height: 80px;
+            background: #21262d;
+            border: 2px solid #30363d;
+            font-size: 32px;
+            font-weight: bold;
+            color: #58a6ff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: 0.2s;
+        }
+        .cell:hover { background: #30363d; }
+        button {
+            background: #238636;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 14px;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover { background: #2ea043; }
+        #status { margin: 10px 0; font-size: 16px; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <div class="game-container">
+        <h2>🎮 Quick Dev Tic-Tac-Toe</h2>
+        <div id="status">Giliran Pemain: X</div>
+        <div class="board" id="board"></div>
+        <button onclick="resetGame()">Main Lagi</button>
+    </div>
+
+    <script>
+        const boardElement = document.getElementById('board');
+        const statusElement = document.getElementById('status');
+        let board = ['', '', '', '', '', '', '', '', ''];
+        let currentPlayer = 'X';
+        let isGameActive = true;
+
+        function createBoard() {
+            boardElement.innerHTML = '';
+            board.forEach((cell, index) => {
+                const cellElement = document.createElement('div');
+                cellElement.classList.add('cell');
+                cellElement.dataset.index = index;
+                cellElement.textContent = cell;
+                cellElement.addEventListener('click', handleCellClick);
+                boardElement.appendChild(cellElement);
+            });
+        }
+
+        function handleCellClick(e) {
+            const index = e.target.dataset.index;
+            if (board[index] !== '' || !isGameActive) return;
+
+            board[index] = currentPlayer;
+            e.target.textContent = currentPlayer;
+            
+            checkWinner();
+        }
+
+        function checkWinner() {
+            const winConditions = [
+                [0,1,2], [3,4,5], [6,7,8],
+                [0,3,6], [1,4,7], [2,5,8],
+                [0,4,8], [2,4,6]
+            ];
+
+            let roundWon = false;
+            for (let condition of winConditions) {
+                let [a, b, c] = condition;
+                if (board[a] && board[a] === board[b] && board[a] === board[c]) {
+                    roundWon = true;
+                    break;
+                }
+            }
+
+            if (roundWon) {
+                statusElement.textContent = `🎉 Pemenang: ${currentPlayer}!`;
+                isGameActive = false;
+                return;
+            }
+
+            if (!board.includes('')) {
+                statusElement.textContent = `🤝 Seri!`;
+                isGameActive = false;
+                return;
+            }
+
+            currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+            statusElement.textContent = `Giliran Pemain: ${currentPlayer}`;
+        }
+
+        function resetGame() {
+            board = ['', '', '', '', '', '', '', '', ''];
+            currentPlayer = 'X';
+            isGameActive = true;
+            statusElement.textContent = `Giliran Pemain: ${currentPlayer}`;
+            createBoard();
+        }
+
+        createBoard();
+    </script>
+</body>
+</html>
