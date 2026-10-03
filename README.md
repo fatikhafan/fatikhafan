@@ -47,3 +47,8 @@ Fokus utama diarahkan pada pengembangan web, pengelolaan database/SQL, pemrogram
 <div align="center">
   <code>⚡ <b>GO BIG OR GO HOME</b> — Berani melangkah atau tidak sama sekali. ⚡</code>
 </div>
+
+
+<div align="center">
+  <img src="https://github.com/fatikhafan/fatikhafan/blob/output/github-snake-dark.svg" alt="Snake Animation" />
+</div>
