@@ -1,6 +1,8 @@
 <div align="center">
 
-Web Developer | Data & Backend Enthusiast
+# Web Developer | Data & Backend Enthusiast
+
+### Fatikh Afan Kurniawan, S.Kom
 
 </div>
 
