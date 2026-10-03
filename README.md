@@ -2,7 +2,7 @@
 
 # Web Developer | Data & Backend Enthusiast
 
-### Fatikh Afan Kurniawan, S.Kom
+##### Fatikh Afan Kurniawan, S.Kom
 
 </div>
 
